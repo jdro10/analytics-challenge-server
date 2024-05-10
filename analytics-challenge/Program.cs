@@ -6,6 +6,13 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+var config =
+    new ConfigurationBuilder()
+        .SetBasePath(Directory.GetCurrentDirectory())
+        .AddJsonFile("appsettings.json", true)
+        .AddEnvironmentVariables()
+        .Build();
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
