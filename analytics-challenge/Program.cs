@@ -1,8 +1,14 @@
+using analytics_challenge.Services;
+using analytics_challenge.Services.Interfaces;
+using Microsoft.Extensions.Options;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddHttpClient();
+builder.Services.AddScoped<IHttpClientService, HttpClientService>();
 
 var app = builder.Build();
 
