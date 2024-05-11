@@ -1,6 +1,5 @@
 using analytics_challenge.Services;
 using analytics_challenge.Services.Interfaces;
-using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
