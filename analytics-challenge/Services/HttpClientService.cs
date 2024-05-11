@@ -1,5 +1,7 @@
 ﻿using analytics_challenge.Exceptions;
 using analytics_challenge.Services.Interfaces;
+using Newtonsoft.Json;
+using System.Text;
 
 namespace analytics_challenge.Services
 {
@@ -30,26 +32,25 @@ namespace analytics_challenge.Services
             if (response.IsSuccessStatusCode)
             {
                 return await response.Content.ReadAsStringAsync();
-
             }
 
             return string.Empty;
         }
 
-        public async Task<string> PostAsync(string endpoint, string body)
+        public async Task<string> PostAsync(string endpoint, object body)
         {
             this.ValidateApiConfiguration();
 
             HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, $"{this._apiUrl}/{endpoint}");
             request.Headers.Add("X-API-Key", _apiKey);
-            request.Content = JsonContent.Create(body);
+            var t = JsonConvert.SerializeObject(body);
+            request.Content = new StringContent(JsonConvert.SerializeObject(body), Encoding.UTF8, "application/json");
 
             HttpResponseMessage response = await _httpClient.SendAsync(request);
 
             if (response.IsSuccessStatusCode)
             {
                 return await response.Content.ReadAsStringAsync();
-
             }
 
             return string.Empty;
@@ -61,7 +62,6 @@ namespace analytics_challenge.Services
             {
                 throw new ConfigurationException("Invalid API configuration. Please update the API URL and API KEY in the appsettings.json file!");
             }
-
         }
     }
 }

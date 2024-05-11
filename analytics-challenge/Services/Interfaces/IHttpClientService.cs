@@ -4,6 +4,6 @@
     {
         Task<string> GetAsync(string endpoint);
 
-        Task<string> PostAsync(string endpoint, string body);
+        Task<string> PostAsync(string endpoint, object body);
     }
 }

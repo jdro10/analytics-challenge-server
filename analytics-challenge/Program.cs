@@ -8,6 +8,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHttpClient();
 builder.Services.AddScoped<IHttpClientService, HttpClientService>();
+builder.Services.AddScoped<ISimulation, Simulation>();
 
 var app = builder.Build();
 
@@ -27,6 +28,11 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseCors(x => x.AllowAnyMethod()
+                  .AllowAnyHeader()
+                  .SetIsOriginAllowed(origin => true)
+                  .AllowCredentials());
 
 app.MapControllers();
 
