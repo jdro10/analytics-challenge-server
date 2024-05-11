@@ -39,7 +39,7 @@ namespace analytics_challenge.Utilities
                     Name = "test",
                     Assets = this.BuildAssets(),
                     RebalancingFrequency = 2,
-                    CashAssetClassName = this.simulationParameters.ScenarioSpace,
+                    CashAssetClassName = string.IsNullOrWhiteSpace(this.simulationParameters.ScenarioSpace) ? "CS_EUR" : this.simulationParameters.ScenarioSpace,
                     PortfolioMgmtFee = 0,
                     Liquid = true,
                     CapitalGainTaxRate = 0.15f,
