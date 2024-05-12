@@ -18,20 +18,20 @@ namespace analytics_challenge.Services
         /// </summary>
         /// <param name="simulationParameters"></param>
         /// <returns></returns>
-        public async Task<string> BuildSimulationRequest(SimulationParametersRequest simulationParameters)
+        public async Task<string> BuildSimulationRequest(SimulationParametersRequest simulationParametersRequest)
         {
-            SimulationRequest simulationRequest = new SimulationRequestBuilder(simulationParameters).BuildSimulationRequest();
+            SimulationRequest simulationRequest = new SimulationRequestBuilder(simulationParametersRequest).BuildSimulationRequest();
 
-            return await this.PerformSimulationRequest(simulationRequest);
+            return await this.PerformSimulationRequest(simulationRequest, simulationParametersRequest.ScenarioSpace);
         }
 
         /// <summary>
         /// Calls the HTTP client to perform a POST request using the built simulation request
         /// </summary>
         /// <param name="simulationRequest">The built simulation request</param>
-        public async Task<string> PerformSimulationRequest(SimulationRequest simulationRequest)
+        public async Task<string> PerformSimulationRequest(SimulationRequest simulationRequest, string? scenarioSpace)
         {
-            return await this._httpClientService.PostAsync("simulations", simulationRequest);
+            return await this._httpClientService.PostAsync("simulations", simulationRequest, "scenarioSpace", scenarioSpace);
         }
     }
 }

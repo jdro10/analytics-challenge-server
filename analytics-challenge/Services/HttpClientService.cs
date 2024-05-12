@@ -26,11 +26,18 @@ namespace analytics_challenge.Services
         /// <param name="endpoint">The API endpoint</param>
         /// <param name="body">The body data</param>
         /// <returns>The API response or empty string in case of an error code</returns>
-        public async Task<string> PostAsync(string endpoint, object body)
+        public async Task<string> PostAsync(string endpoint, object body, string? queryParam, string? queryParamValue)
         {
             this.ValidateApiConfiguration();
 
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, $"{this._apiUrl}/{endpoint}");
+            StringBuilder url = new StringBuilder($"{this._apiUrl}/{endpoint}");
+
+            if (!string.IsNullOrWhiteSpace(queryParam))
+            {
+                url.Append($"?{queryParam}={queryParamValue?.Trim() ?? string.Empty}");
+            }
+
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, url.ToString());
             request.Headers.Add("X-API-Key", _apiKey);
             request.Content = new StringContent(JsonConvert.SerializeObject(body), Encoding.UTF8, "application/json");
 

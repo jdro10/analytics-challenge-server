@@ -2,6 +2,6 @@
 {
     public interface IHttpClientService
     {
-        Task<string> PostAsync(string endpoint, object body);
+        Task<string> PostAsync(string endpoint, object body, string? queryParam, string? queryParamValue);
     }
 }
