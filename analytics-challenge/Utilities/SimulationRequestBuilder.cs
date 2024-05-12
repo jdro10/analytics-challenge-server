@@ -4,6 +4,7 @@ namespace analytics_challenge.Utilities
 {
     public class SimulationRequestBuilder
     {
+        private const string DEFAULT_CASH_ASSET_NAME = "CS_EUR";
         private readonly SimulationParametersRequest simulationParameters;
 
         public SimulationRequestBuilder(SimulationParametersRequest simulationParameters)
@@ -45,7 +46,7 @@ namespace analytics_challenge.Utilities
                     Name = "test",
                     Assets = this.BuildAssets(),
                     RebalancingFrequency = 2,
-                    CashAssetClassName = string.IsNullOrWhiteSpace(this.simulationParameters.ScenarioSpaceName) ? "CS_EUR" : this.simulationParameters.ScenarioSpaceName,
+                    CashAssetClassName = string.IsNullOrWhiteSpace(this.simulationParameters.ScenarioSpaceName) ? DEFAULT_CASH_ASSET_NAME : this.simulationParameters.ScenarioSpaceName,
                     PortfolioMgmtFee = 0,
                     Liquid = true,
                     CapitalGainTaxRate = 0.15f,

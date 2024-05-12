@@ -7,12 +7,10 @@ namespace analytics_challenge.Controllers
     [ApiController]
     public class Simulation : Controller
     {
-        private readonly IHttpClientService _httpClientService;
         private readonly ISimulation _simulation;
 
-        public Simulation(IHttpClientService httpClientService, ISimulation simulation)
+        public Simulation(ISimulation simulation)
         {
-            this._httpClientService = httpClientService;
             this._simulation = simulation;
         }
 
@@ -26,9 +24,7 @@ namespace analytics_challenge.Controllers
         {
             try
             {
-                string result = await this._simulation.BuildSimulationRequest(simulationParameters);
-
-                return Ok(result);
+                return Ok(await this._simulation.BuildSimulationRequest(simulationParameters));
             }
             catch (Exception ex)
             {
