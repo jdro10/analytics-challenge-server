@@ -1,0 +1,7 @@
+services:
+  analyticschallengeserver:
+    container_name: analyticschallengeservercontainer
+    build: .
+    image: analyticschallengeserver:v1
+    ports:
+      - 7070:8080
