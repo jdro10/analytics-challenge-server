@@ -16,6 +16,11 @@ namespace analytics_challenge.Controllers
             this._simulation = simulation;
         }
 
+        /// <summary>
+        /// Endpoint builds the request given a specific asset classes and scenario space
+        /// then calls the API simulation endpoint and returns the result
+        /// </summary>
+        /// <param name="simulationParameters"></param>
         [HttpPost("api/simulation")]
         public async Task<IActionResult> PerformSimulation([FromBody] SimulationParametersRequest simulationParameters)
         {

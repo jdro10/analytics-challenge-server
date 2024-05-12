@@ -11,6 +11,9 @@ namespace analytics_challenge.Utilities
             this.simulationParameters = simulationParameters;
         }
 
+        /// <summary>
+        /// Builds the simulation request
+        /// </summary>
         public SimulationRequest BuildSimulationRequest()
         {
             SimulationRequest simulationRequest = new SimulationRequest
@@ -30,6 +33,9 @@ namespace analytics_challenge.Utilities
             return simulationRequest;
         }
 
+        /// <summary>
+        /// Builds the portfolio data for the request
+        /// </summary>
         private List<Portfolio> BuildPortfolio()
         {
             return new List<Portfolio>
@@ -49,6 +55,10 @@ namespace analytics_challenge.Utilities
             };
         }
 
+        /// <summary>
+        /// Builds the asset classes for the request
+        /// </summary>
+        /// <returns></returns>
         private List<Asset> BuildAssets()
         {
             List<Asset> assets = new List<Asset>();

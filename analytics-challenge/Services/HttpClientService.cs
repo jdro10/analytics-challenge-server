@@ -20,30 +20,18 @@ namespace analytics_challenge.Services
             this._httpClient = httpClientFactory.CreateClient();
         }
 
-        public async Task<string> GetAsync(string endpoint)
-        {
-            this.ValidateApiConfiguration();
-
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, $"{this._apiUrl}/{endpoint}");
-            request.Headers.Add("X-API-Key", _apiKey);
-
-            HttpResponseMessage response = await _httpClient.SendAsync(request);
-
-            if (response.IsSuccessStatusCode)
-            {
-                return await response.Content.ReadAsStringAsync();
-            }
-
-            return string.Empty;
-        }
-
+        /// <summary>
+        /// Perfoms an HTTP POST request to a specific endpoint
+        /// </summary>
+        /// <param name="endpoint">The API endpoint</param>
+        /// <param name="body">The body data</param>
+        /// <returns>The API response or empty string in case of an error code</returns>
         public async Task<string> PostAsync(string endpoint, object body)
         {
             this.ValidateApiConfiguration();
 
             HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, $"{this._apiUrl}/{endpoint}");
             request.Headers.Add("X-API-Key", _apiKey);
-            var t = JsonConvert.SerializeObject(body);
             request.Content = new StringContent(JsonConvert.SerializeObject(body), Encoding.UTF8, "application/json");
 
             HttpResponseMessage response = await _httpClient.SendAsync(request);
@@ -56,6 +44,9 @@ namespace analytics_challenge.Services
             return string.Empty;
         }
 
+        /// <summary>
+        /// Validates if the API is correctly configured
+        /// </summary>
         private void ValidateApiConfiguration()
         {
             if (string.IsNullOrEmpty(this._apiUrl) || string.IsNullOrEmpty(this._apiKey))
