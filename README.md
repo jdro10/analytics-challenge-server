@@ -10,7 +10,7 @@ cd analytics-challenge
 
 # Update appsettings.json file
 "ApiSettings": {
-  "ApiUrl": "https://{DOMAIN}/api/public/v1", // Replace {DOMAIN} with the actual domain of the API.
+  "ApiUrl": "https://{DOMAIN}/api/public/v1", // Replace {DOMAIN} with the actual API domain.
   "ApiKey": "API_KEY_HERE"
 }
 
