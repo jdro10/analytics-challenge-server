@@ -15,7 +15,7 @@ cd analytics-challenge
 }
 
 # Back into the root folder:
-cd
+cd ..
 
 # Run docker compose:
 docker-compose up -d --build
